@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: SplitIo-POC
+  profiles:
+    active: local
+  server:
+    port: 8081
+
+split:
+  apiKey: willshareitprivately
