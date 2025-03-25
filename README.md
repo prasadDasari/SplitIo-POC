@@ -92,10 +92,10 @@ Feature is OFF%
 
 Default logging level is INFO.
 
-![img.png](img.png)
+![Feature Flag Status][img.png](img.png)
 
-## Monitoring
-![img_1.png](img_1.png)
+## Monitoring OFF Flag
+![Feature Flag Status] [img_1.png](img_1.png)
 
 8. Switch the feature flag to ON in Split.io and test the application again to see the logging level change to DEBUG.
 ## curl -G "http://localhost:8080/api/feature" --data-urlencode "userKey=user" --data-urlencode "featureName=drz_logging_level_flag"
@@ -104,7 +104,8 @@ Feature is ON%
 
 If the feature flag is ON, the logging level will be changed to DEBUG
 
-![img_2.png](img_2.png)
+## Monitoring ON Flag
+![Feature Flag Status] [img_2.png](img_2.png)
 
 ### Conclusion
 Split.io is a powerful tool for managing feature flags in applications. It allows developers to control the behavior of their applications without redeploying the codebase. By integrating Split.io into the project, developers can easily create, manage, and test feature flags to enable/disable features based on specific conditions. This POC application demonstrates how to use Split.io to manage feature flags in a Java application and provides a starting point for integrating Split.io into other projects.
