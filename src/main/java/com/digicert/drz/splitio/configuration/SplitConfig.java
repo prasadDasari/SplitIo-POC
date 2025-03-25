@@ -4,24 +4,29 @@ import io.split.client.SplitClient;
 import io.split.client.SplitClientConfig;
 import io.split.client.SplitFactory;
 import io.split.client.SplitFactoryBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-
+/**
+ * Split.io Configuration to initialize the Split client.
+ */
+@Slf4j
 @Configuration
 public class SplitConfig {
-
-    private static final Logger logger = LoggerFactory.getLogger(SplitConfig.class);
 
     @Value("${split.apiKey}")
     private String apiKey;
 
+    /**
+     * Bean to initialize SplitClient.
+     * @return SplitClient instance.
+     * @throws Exception if there are issues during Split.io client initialization.
+     */
     @Bean
     public SplitClient splitClient() throws Exception {
-        logger.info("Initializing SplitClient with API key: {}", apiKey);
+        log.info("Initializing SplitClient with API key: {}", apiKey);
 
         SplitClientConfig config = SplitClientConfig.builder()
                 .setBlockUntilReadyTimeout(10000)
@@ -30,13 +35,7 @@ public class SplitConfig {
         SplitClient client = splitFactory.client();
         client.blockUntilReady();
 
-        // Test the API key by fetching a feature flag
-        String testFeature = "drz_feature";
-        String treatment = client.getTreatment("user", testFeature);
-        logger.info("Test feature flag treatment: {}", treatment);
-
-        logger.info("SplitClient initialized successfully");
-        logger.info("SplitClient configuration: BlockUntilReadyTimeout = {}", config.blockUntilReady());
+        log.info("SplitClient initialized successfully");
         return client;
     }
 }

@@ -1,6 +1,5 @@
 package com.digicert.drz.splitio;
 
-
 import com.digicert.drz.splitio.controller.FeatureFlagController;
 import com.digicert.drz.splitio.service.FeatureFlagService;
 import io.split.client.SplitClient;
@@ -34,19 +33,35 @@ public class FeatureFlagControllerTest {
     public void testCheckFeature() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(featureFlagController).build();
 
-        Mockito.when(featureFlagService.isFeatureEnabled("user1", "feature1")).thenReturn(true);
-
+        // Test when logging_level_flag is set to DEBUG
+        Mockito.when(featureFlagService.getLoggingLevel("user1")).thenReturn("DEBUG");
         mockMvc.perform(get("/api/feature")
                         .param("userKey", "user1")
-                        .param("featureName", "feature1"))
+                        .param("featureName", "logging_level_flag"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Feature is OFF | Logging level is set to: DEBUG"));
+
+        // Test when logging_level_flag is set to INFO
+        Mockito.when(featureFlagService.getLoggingLevel("user1")).thenReturn("INFO");
+        mockMvc.perform(get("/api/feature")
+                        .param("userKey", "user1")
+                        .param("featureName", "logging_level_flag"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Feature is OFF | Logging level is set to: INFO"));
+
+        // Test the default feature flag "drz_logging_level_flag" behavior for a generic feature (not logging related)
+        Mockito.when(featureFlagService.isFeatureEnabled("user1", "drz_logging_level_flag")).thenReturn(true);
+        mockMvc.perform(get("/api/feature")
+                        .param("userKey", "user1")
+                        .param("featureName", "drz_logging_level_flag"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Feature is ON"));
 
-        Mockito.when(featureFlagService.isFeatureEnabled("user1", "feature1")).thenReturn(false);
-
+        // Test when the feature flag is off for "drz_logging_level_flag"
+        Mockito.when(featureFlagService.isFeatureEnabled("user1", "drz_logging_level_flag")).thenReturn(false);
         mockMvc.perform(get("/api/feature")
                         .param("userKey", "user1")
-                        .param("featureName", "feature1"))
+                        .param("featureName", "drz_logging_level_flag"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Feature is OFF"));
     }
