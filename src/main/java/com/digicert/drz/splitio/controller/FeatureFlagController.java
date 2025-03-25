@@ -4,6 +4,7 @@ import com.digicert.drz.splitio.service.FeatureFlagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class FeatureFlagController {
 
     private final FeatureFlagService featureFlagService;
@@ -29,17 +31,22 @@ public class FeatureFlagController {
      */
     @GetMapping("/feature")
     public String checkFeature(@RequestParam String userKey, @RequestParam String featureName) {
+        log.debug("Received request to check feature flag: {} for user: {}", featureName, userKey);
+
         // Check if the feature is enabled (e.g., "drz_logging_level_flag")
         boolean isFeatureEnabled = featureFlagService.isFeatureEnabled(userKey, featureName);
         String featureStatus = isFeatureEnabled ? "Feature is ON" : "Feature is OFF";
+        log.debug("Feature flag '{}' for user '{}' is {}", featureName, userKey, featureStatus);
 
         // Adjust logging level dynamically based on the 'logging_level_flag'
         if ("logging_level_flag".equals(featureName)) {
             String loggingLevel = featureFlagService.getLoggingLevel(userKey);
+            log.debug("Feature '{}' triggered logging level check, setting logging level to: {}", featureName, loggingLevel);
             adjustLoggingLevel(loggingLevel);
             return featureStatus + " | Logging level is set to: " + loggingLevel;
         }
 
+        log.debug("Feature '{}' does not require dynamic logging level adjustment.", featureName);
         return featureStatus;
     }
 
