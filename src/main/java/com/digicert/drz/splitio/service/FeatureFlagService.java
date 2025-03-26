@@ -27,12 +27,12 @@ public class FeatureFlagService {
     public String getLoggingLevel(String userKey) {
         String featureFlagName = "drz_logging_level_flag";  // The feature flag controlling logging level
 
-        log.debug("Fetching logging level for user '{}', using feature flag '{}'", userKey, featureFlagName); // Debugging userKey and feature flag name
+        log.debug("Fetching logging level for user '{}', using feature flag '{}'", userKey, featureFlagName);
         // Fetch the treatment (DEBUG or INFO)
         String treatment = splitClient.getTreatment(userKey, featureFlagName);
         log.debug("Fetched treatment for user '{}': {}", userKey, treatment);
 
-        if ("DEBUG".equals(treatment)) {
+        if ("on".equals(treatment)) {
             log.debug("Setting logging level to DEBUG for user '{}'", userKey);
             return "DEBUG";  // Enable DEBUG level logging
         }
@@ -52,7 +52,7 @@ public class FeatureFlagService {
 
         log.debug("Fetched treatment for feature '{}', user '{}': {}", featureName, userKey, treatment);
         boolean isEnabled = "on".equals(treatment);
-        log.debug("Feature '{}' for user '{}' is {}", featureName, userKey, isEnabled ? "enabled" : "disabled"); // Log if feature is enabled or disabled
+        log.debug("Feature '{}' for user '{}' is {}", featureName, userKey, isEnabled ? "enabled" : "disabled");
         return isEnabled;
     }
 }

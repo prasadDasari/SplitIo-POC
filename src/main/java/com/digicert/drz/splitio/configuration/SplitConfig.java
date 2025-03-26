@@ -27,8 +27,6 @@ public class SplitConfig {
     @Bean
     public SplitClient splitClient() throws Exception {
         log.debug("Initializing SplitClient with API key Configured ..");
-        log.info("Initializing SplitClient with API key Configured ...");
-
         SplitClientConfig config = SplitClientConfig.builder()
                 .setBlockUntilReadyTimeout(10000)
                 .build();
@@ -39,7 +37,6 @@ public class SplitConfig {
         client.blockUntilReady();
 
         log.debug("SplitClient initialized successfully ...");
-        log.info("SplitClient initialized successfully ...");
         return client;
     }
 }
