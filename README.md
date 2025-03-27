@@ -103,3 +103,8 @@ If the feature flag is ON, the logging level will be changed to DEBUG
 Split.io is a powerful tool for managing feature flags in applications. It allows developers to control the behavior of their applications without redeploying the codebase. 
 By integrating Split.io into the project, developers can easily create, manage and test feature flags to enable/disable features based on specific conditions. 
 This POC application demonstrates how to use Split.io to manage feature flags in a Java application and provides a starting point for integrating Split.io into other projects.
+
+###
+Alert Baseline Treatment to ensure INFO logging is the default when the flag is killed,
+while the Default Treatment would help set the logging level for users 
+who aren't specifically targeted by the flag.

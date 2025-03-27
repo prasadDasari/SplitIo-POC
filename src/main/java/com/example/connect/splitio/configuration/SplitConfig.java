@@ -1,4 +1,4 @@
-package com.digicert.drz.splitio.configuration;
+package com.example.connect.splitio.configuration;
 
 import io.split.client.SplitClient;
 import io.split.client.SplitClientConfig;

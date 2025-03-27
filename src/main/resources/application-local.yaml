@@ -11,7 +11,7 @@ spring:
             splitio: DEBUG
   custom:
     logging:
-      package: com.digicert.drz.splitio
+      package: com.example.connect.splitio
 
 split:
   apiKey: WILL SHARE IT PRIVATELY

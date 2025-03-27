@@ -1,6 +1,6 @@
-package com.digicert.drz.splitio.controller;
+package com.example.connect.splitio.controller;
 
-import com.digicert.drz.splitio.service.FeatureFlagService;
+import com.example.connect.splitio.service.FeatureFlagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

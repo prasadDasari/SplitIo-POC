@@ -1,4 +1,4 @@
-package com.digicert.drz.splitio;
+package com.example.connect.splitio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

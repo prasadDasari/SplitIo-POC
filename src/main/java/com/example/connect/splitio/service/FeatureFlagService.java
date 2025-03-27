@@ -1,4 +1,4 @@
-package com.digicert.drz.splitio.service;
+package com.example.connect.splitio.service;
 
 import io.split.client.SplitClient;
 import lombok.extern.slf4j.Slf4j;

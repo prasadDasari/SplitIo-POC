@@ -1,8 +1,7 @@
-package com.digicert.drz.splitio;
+package com.example.connect.splitio;
 
-import com.digicert.drz.splitio.controller.FeatureFlagController;
-import com.digicert.drz.splitio.service.FeatureFlagService;
-import io.split.client.SplitClient;
+import com.example.connect.splitio.controller.FeatureFlagController;
+import com.example.connect.splitio.service.FeatureFlagService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
