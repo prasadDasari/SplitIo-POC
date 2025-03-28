@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DrzSplitIOApplication {
+public class DemoSplitIOApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DrzSplitIOApplication.class, args);
+        SpringApplication.run(DemoSplitIOApplication.class, args);
     }
 }
 
