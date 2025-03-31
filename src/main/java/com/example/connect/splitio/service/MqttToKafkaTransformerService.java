@@ -17,10 +17,10 @@ public class MqttToKafkaTransformerService {
         this.splitClient = splitClient;
     }
 
-    public void performAction(String userKey) {
+    public void performAction(String userKey, String featureFlagName) {
         logger.info("Starting performAction for userKey: {}", userKey);
 
-        String treatment = splitClient.getTreatment(userKey, "service_feature_flag");
+        String treatment = splitClient.getTreatment(userKey, featureFlagName);
         logger.debug("Retrieved treatment for userKey {}: {}", userKey, treatment);
 
         if ("on".equals(treatment)) {

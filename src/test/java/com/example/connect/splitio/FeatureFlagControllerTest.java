@@ -86,10 +86,10 @@ class FeatureFlagControllerTest {
                 .andExpect(content().string("Feature is ON"));
 
         // Verify that performAction is called for ConnectorService
-        Mockito.verify(connectorService, Mockito.times(1)).performAction("user1");
+        Mockito.verify(connectorService, Mockito.times(1)).performAction("user1", FeatureFlag.CONNECTOR_SERVICE_LOGGING_FLAG.getFlagName());
 
         // Verify that performAction is called for MqttToKafkaTransformerService
-        Mockito.verify(mqttToKafkaTransformerService, Mockito.times(1)).performAction("user1");
+        Mockito.verify(mqttToKafkaTransformerService, Mockito.times(1)).performAction("user1", FeatureFlag.MQTT_TO_KAFKA_SERVICE_LOGGING_FLAG.getFlagName());
     }
 
     @Test

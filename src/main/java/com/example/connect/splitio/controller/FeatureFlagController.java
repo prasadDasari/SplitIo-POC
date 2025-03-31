@@ -63,9 +63,9 @@ public class FeatureFlagController {
         log.debug("Received request to check service feature flag: {} for user: {}", featureName, userKey);
 
         if (FeatureFlag.CONNECTOR_SERVICE_LOGGING_FLAG.getFlagName().equals(featureName)) {
-            return executeServiceAction(userKey, featureName, connectorService::performAction);
+            return executeServiceAction(userKey, featureName, (key) -> connectorService.performAction(key, featureName));
         } else if (FeatureFlag.MQTT_TO_KAFKA_SERVICE_LOGGING_FLAG.getFlagName().equals(featureName)) {
-            return executeServiceAction(userKey, featureName, mqttToKafkaTransformerService::performAction);
+            return executeServiceAction(userKey, featureName, (key) -> mqttToKafkaTransformerService.performAction(key, featureName));
         } else {
             log.warn("Service feature flag '{}' does not exist", featureName);
             return "Service feature flag does not exist";
