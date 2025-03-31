@@ -42,12 +42,12 @@ public class FeatureFlagController {
         log.info("Endpoint '/api/feature' hit with userKey: {} and featureName: {}", userKey, featureName);
         log.debug("Received request to check feature flag: {} for user: {}", featureName, userKey);
 
-        // Check if the feature is enabled (e.g., "drz_logging_level_flag")
+        // Check if the feature is enabled (e.g., "env_logging_level_flag")
         boolean isFeatureEnabled = featureFlagService.isFeatureEnabled(userKey, featureName);
         String featureStatus = isFeatureEnabled ? "Feature is ON" : "Feature is OFF";
         log.debug("Feature flag '{}' for user '{}' is {}", featureName, userKey, featureStatus);
 
-        // Adjust logging level dynamically based on the 'drz_logging_level_flag'
+        // Adjust logging level dynamically based on the 'env_logging_level_flag'
         if (isFeatureEnabled && "drz_logging_level_flag".equals(featureName)) {
             String loggingLevel = featureFlagService.getLoggingLevel(userKey);
             log.debug("Feature '{}' triggered logging level check, setting logging level to: {}", featureName, loggingLevel);
@@ -60,7 +60,7 @@ public class FeatureFlagController {
     }
 
     /**
-     * Adjust the logging level based on the value of the 'drz_logging_level_flag'.
+     * Adjust the logging level based on the value of the 'env_logging_level_flag'.
      * @param loggingLevel The logging level to set (DEBUG or INFO).
      */
     private void adjustLoggingLevel(String loggingLevel) {
