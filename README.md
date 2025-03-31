@@ -13,7 +13,7 @@ For example, we can temporarily switch the application's logging level from INFO
 - Split.io Java SDK
 
 ## Package
-- `com.digicert.drz.splitio.poc`
+- `com.example.connect.splitio.poc`
 
 ## Reference Link
 [Split.io Java SDK Documentation](https://help.split.io/hc/en-us/articles/360020405151-Java-SDK)
@@ -59,13 +59,13 @@ Modify the application to check the status of feature flags and enable/disable f
 
 
 ### Testing Feature Flags after creating them in Split.io
-1. Create a feature flag in Split.io. Ex: `drz_logging_level_flag` created for this poc.
+1. Create a feature flag in Split.io. Ex: `env_logging_level_flag` created for this poc.
 2. Configure Treatments and necessary config for logging level, as per screenshot, Click `Review` Changes and Click `Save` it
 
 
 ![FeatureFlag-SetupForLogging.png](assets/FeatureFlag-SetupForLogging.png)
 
-3. Run the spring boot DrzSplitIOApplication.
+3. Run the spring boot DemoSplitIOApplication.
 4. Access the API endpoint to check the status of the feature flag: (Ex: http://localhost:8080/feature-flag/{feature-flag-name})
    Check `Curl Endpoints` provided below
 5. Verify that the feature flag is working as expected
@@ -74,7 +74,7 @@ Modify the application to check the status of feature flags and enable/disable f
 
 ### Curl Endpoints
 Please Note: Default logging level is INFO.
-curl -G "http://localhost:8080/api/feature" --data-urlencode "userKey=user" --data-urlencode "featureName=drz_logging_level_flag"
+curl -G "http://localhost:8080/api/feature" --data-urlencode "userKey=user" --data-urlencode "featureName=env_logging_level_flag"
 
 
 ![curl-debug-OFF.png](assets/curl-debug-OFF.png)
@@ -85,7 +85,7 @@ curl -G "http://localhost:8080/api/feature" --data-urlencode "userKey=user" --da
 ![Info-logs-OFF.png](assets/Info-logs-OFF.png)
 
 8. Switch the feature flag to ON in Split.io and test the application again to see the logging level change to DEBUG.
-## curl -G "http://localhost:8080/api/feature" --data-urlencode "userKey=user" --data-urlencode "featureName=drz_logging_level_flag"
+## curl -G "http://localhost:8080/api/feature" --data-urlencode "userKey=user" --data-urlencode "featureName=env_logging_level_flag"
 
 ![curl-debug-ON.png](assets/curl-debug-ON.png)
 

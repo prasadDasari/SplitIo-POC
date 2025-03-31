@@ -9,5 +9,8 @@
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <logger name="com.example.connect.splitio" level="INFO" />
+    <logger name="com.example.connect.splitio" level="DEBUG" />
+    <logger name="com.example.connect.splitio.service.ConnectorService" level="DEBUG" />
+    <logger name="com.example.connect.splitio.service.MqttToKafkaTransformerService" level="DEBUG" />
+    <logger name="io.split" level="DEBUG" />
 </configuration>
