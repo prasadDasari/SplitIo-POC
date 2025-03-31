@@ -1,0 +1,24 @@
+spring:
+  config:
+    activate:
+      on-profile: gp2-demo
+  application:
+    name: SplitIo-POC-Demo
+  server:
+    port: 8081
+  logging:
+    level:
+      com:
+        example:
+          connect:
+            splitio: DEBUG
+  custom:
+    logging:
+      package: com.example.connect.splitio
+
+split:
+  apiKey: YOUR_SPLIT_IO_API_KEY_FOR_DEMO
+  environment: GP2Demo
+  services:
+    connector: {}
+    mqtt-to-kafka-transformer: {}

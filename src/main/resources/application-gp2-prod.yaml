@@ -1,0 +1,22 @@
+spring:
+  profiles: gp2-prod
+  application:
+    name: SplitIo-POC-Prod
+  server:
+    port: 8082
+  logging:
+    level:
+      com:
+        example:
+          connect:
+            splitio: INFO
+  custom:
+    logging:
+      package: com.example.connect.splitio
+
+split:
+  apiKey: YOUR_SPLIT_IO_API_KEY_FOR_PROD
+  environment: GP2Prod
+  services:
+    connector: {}
+    mqtt-to-kafka-transformer: {}
