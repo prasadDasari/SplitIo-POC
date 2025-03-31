@@ -25,7 +25,7 @@ public class FeatureFlagService {
      * @return the logging level (DEBUG or INFO).
      */
     public String getLoggingLevel(String userKey) {
-        String featureFlagName = "drz_logging_level_flag";  // The feature flag controlling logging level
+        String featureFlagName = "env_logging_level_flag";  // The feature flag controlling logging level
 
         log.debug("Fetching logging level for user '{}', using feature flag '{}'", userKey, featureFlagName);
         // Fetch the treatment (DEBUG or INFO)
