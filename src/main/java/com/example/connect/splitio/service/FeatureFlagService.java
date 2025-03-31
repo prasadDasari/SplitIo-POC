@@ -43,7 +43,7 @@ public class FeatureFlagService {
     /**
      * Check if a specific feature flag is enabled for a user.
      * @param userKey The unique key for the user.
-     * @param featureName The feature flag name (e.g., "drz_feature").
+     * @param featureName The feature flag name (e.g., "env_feature").
      * @return true if the feature is enabled, false otherwise.
      */
     public boolean isFeatureEnabled(String userKey, String featureName) {
