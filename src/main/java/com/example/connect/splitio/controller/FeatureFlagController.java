@@ -80,13 +80,18 @@ public class FeatureFlagController {
         }
 
         String treatment = featureFlagService.getLoggingLevel(userKey, featureFlag);
-        if ("on".equals(treatment)) {
+        boolean isFeatureEnabled = "on".equals(treatment);
+        String featureStatus = isFeatureEnabled ? "Feature is ON" : "Feature is OFF";
+        String loggingLevel = isFeatureEnabled ? "DEBUG" : "INFO";
+
+        if (isFeatureEnabled) {
             action.accept(userKey);
-            return "Feature is ON";
         } else {
             log.info("Feature flag '{}' is OFF. No action performed.", featureName);
-            return "Feature is OFF";
         }
+
+        return featureStatus + " | Logging level is set to: " + loggingLevel;
+
     }
 
     private FeatureFlag getFeatureFlagByName(String flagName) {

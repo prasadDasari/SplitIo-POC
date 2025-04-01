@@ -75,15 +75,31 @@ class FeatureFlagControllerTest {
                         .param("userKey", "user1")
                         .param("featureName", FeatureFlag.CONNECTOR_SERVICE_LOGGING_FLAG.getFlagName()))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Feature is ON"));
+                .andExpect(content().string("Feature is ON | Logging level is set to: DEBUG"));
 
-        // Test when the feature flag is on for "mqtt_to_kafka_logging_flag"
+        // Test when the feature flag is off for "connector_service_logging_flag"
+        Mockito.when(featureFlagService.getLoggingLevel("user1", FeatureFlag.CONNECTOR_SERVICE_LOGGING_FLAG)).thenReturn("off");
+        mockMvc.perform(get("/api/feature/service")
+                        .param("userKey", "user1")
+                        .param("featureName", FeatureFlag.CONNECTOR_SERVICE_LOGGING_FLAG.getFlagName()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Feature is OFF | Logging level is set to: INFO"));
+
+        // Test when the feature flag is on for "mqtt_to_kafka_service_logging_flag"
         Mockito.when(featureFlagService.getLoggingLevel("user1", FeatureFlag.MQTT_TO_KAFKA_SERVICE_LOGGING_FLAG)).thenReturn("on");
         mockMvc.perform(get("/api/feature/service")
                         .param("userKey", "user1")
                         .param("featureName", FeatureFlag.MQTT_TO_KAFKA_SERVICE_LOGGING_FLAG.getFlagName()))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Feature is ON"));
+                .andExpect(content().string("Feature is ON | Logging level is set to: DEBUG"));
+
+        // Test when the feature flag is off for "mqtt_to_kafka_service_logging_flag"
+        Mockito.when(featureFlagService.getLoggingLevel("user1", FeatureFlag.MQTT_TO_KAFKA_SERVICE_LOGGING_FLAG)).thenReturn("off");
+        mockMvc.perform(get("/api/feature/service")
+                        .param("userKey", "user1")
+                        .param("featureName", FeatureFlag.MQTT_TO_KAFKA_SERVICE_LOGGING_FLAG.getFlagName()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Feature is OFF | Logging level is set to: INFO"));
 
         // Verify that performAction is called for ConnectorService
         Mockito.verify(connectorService, Mockito.times(1)).performAction("user1", FeatureFlag.CONNECTOR_SERVICE_LOGGING_FLAG.getFlagName());
