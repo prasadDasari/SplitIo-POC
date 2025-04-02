@@ -157,3 +157,35 @@ Feature is OFF | Logging level is set to: INFO
 
 [Users not part of segment, can only see INFO logs, as the Feature is OFF as per targeting rules set]
 
+### Some notes
+
+The two options
+Individual Targets and Add Attribute Based Targeting Rules, are different ways to define which users or groups of users should be served a specific feature treatment
+(i.e., the feature flag's state).
+Here’s the difference and when to use each:
+
+1. Individual Targets:
+* What it is: This option allows you to target specific users (e.g., "user1", "user2") directly by providing their unique identifiers. You can assign the treatment (e.g., on or off) to specific individuals.
+* Use case:
+   * When you want to target specific users directly, such as internal users or users who need special access to certain features (e.g., for testing or internal purposes).
+   * Example: You want to enable a feature for a specific user like "prod-user1" but keep it off for others.
+* How to configure:
+   * Add individual users directly to the targeting rule and assign them a treatment.
+2. Add Attribute Based Targeting Rules:
+* What it is: This option allows you to create more dynamic targeting rules based on user attributes. These attributes could be anything about the user (e.g., region, account type, subscription status, etc.). The feature flag is served based on these attributes, which gives you more flexibility for large-scale targeting.
+* Use case:
+   * When you want to apply feature flags based on user characteristics such as geography (e.g., serve a feature to all users in a specific country), account type (e.g., premium users), or any other custom user attributes.
+   * Example: You want to enable a feature for users who have a "premium" account or users in a specific region.
+* How to configure:
+   * You can use the conditions like Is in segment, Is not in flag, or Is in list to determine whether the user qualifies for the feature treatment. These rules let you control which set of users get the feature enabled based on a broader context (e.g., account status, user attributes).
+     When to Choose What?
+* Choose Individual Targets:
+   * When you need precise control over specific users (e.g., internal testing, early access for some users, etc.).
+   * Example: "Enable this feature for user1 only."
+* Choose Attribute Based Targeting Rules:
+   * When you need to target users in a more scalable way based on specific attributes or conditions.
+   * Example: "Enable this feature for all users in the US region" or "Enable this for all premium users."
+     Visual Explanation from Screenshots:
+* First Screenshot: You're defining an individual target for a specific user (e.g., prod-user1). This directly assigns a treatment (on or off) to the individual user.
+* Second Screenshot: You're using Attribute Based Targeting Rules and specifying conditions, such as whether a user is in a certain segment. This would let you apply the flag to users who fit that condition.
+  Let me know if you'd like further clarification or assistance in setting these up in your system.
