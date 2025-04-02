@@ -108,3 +108,52 @@ This POC application demonstrates how to use Split.io to manage feature flags in
 Alert Baseline Treatment to ensure INFO logging is the default when the flag is killed,
 while the Default Treatment would help set the logging level for users 
 who aren't specifically targeted by the flag.
+
+### Testing 
+gp2-demo: Feature Switched to DEBUG in SplitIO UI, by setting to ON, ByDefault it is OFF.
+
+### pre-requisite: Segment Creation for each environment
+Add demo-user1 and demo-user2 to GP2-Demo Segment in the SplitIO UI.
+Add prod-user1 and prod-user2 to GP2-Prod Segment in SplitIO UI.
+
+1. Environment Flag : env_logging_level_flag
+curl -X GET "http://localhost:8080/api/feature/env?userKey=demo-user1&featureName=env_logging_level_flag"
+Feature is ON | Logging level is set to: DEBUG
+
+curl -X GET "http://localhost:8080/api/feature/env?userKey=demo-user2&featureName=env_logging_level_flag"
+Feature is ON | Logging level is set to: DEBUG
+
+curl -X GET "http://localhost:8080/api/feature/env?userKey=demo-user3&featureName=env_logging_level_flag"
+Feature is ON | Logging level is set to: DEBUG
+
+[All users will see same behaviour as DEBUG]
+
+
+2. Service Flag: connector_service_logging_flag
+curl -X GET "http://localhost:8080/api/feature/service?userKey=demo-user1&featureName=connector_service_logging_flag"
+Feature is ON | Logging level is set to: DEBUG
+
+curl -X GET "http://localhost:8080/api/feature/service?userKey=demo-user2&featureName=connector_service_logging_flag"
+Feature is ON | Logging level is set to: DEBUG
+
+ONLY users in segment (demo-user1 and demo-user2 ) can see DEBUG logs
+
+curl -X GET "http://localhost:8080/api/feature/service?userKey=demo-user3&featureName=connector_service_logging_flag"
+Feature is OFF | Logging level is set to: INFO
+
+[Users not part of segment, can only see INFO logs, as the Feature is OFF as per targeting rules set]
+
+3. Service Flag: mqtt_to_kafka_service_logging_flag
+curl -X GET "http://localhost:8080/api/feature/service?userKey=demo-user1&featureName=mqtt_to_kafka_service_logging_flag" 
+Feature is ON | Logging level is set to: DEBUG%
+
+url -X GET "http://localhost:8080/api/feature/service?userKey=demo-user2&featureName=mqtt_to_kafka_service_logging_flag"
+Feature is ON | Logging level is set to: DEBUG
+
+[ONLY users in segment (demo-user1 and demo-user2 ) can see DEBUG logs]
+
+curl -X GET "http://localhost:8080/api/feature/service?userKey=demo-user3&featureName=mqtt_to_kafka_service_logging_flag"
+Feature is OFF | Logging level is set to: INFO
+
+[Users not part of segment, can only see INFO logs, as the Feature is OFF as per targeting rules set]
+
